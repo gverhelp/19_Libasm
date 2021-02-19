@@ -4,7 +4,6 @@
 ft_write:
     mov     rax, 1   ; syscall write
     syscall
-;    mov r9, rax
     push    rax
     cmp     rsi, 0
     je      iferror
@@ -14,12 +13,10 @@ ft_write:
     cmp     rax, 0
     jne     iferror
     pop     rax
-;    mov rax, r9
     ret
 
 iferror:
     pop     rbx     ; met rax dans rcx
-;    mov rbx, r9
     neg     rax
     mov     rbx, rax
     call    __errno_location wrt ..plt
