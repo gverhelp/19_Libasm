@@ -18,8 +18,8 @@ ft_read:
 iferror:
     pop     rcx  ; mettre rax dans rcx
     neg     rax
-    mov     rdx, rax
+    mov     rcx, rax
     call    __errno_location wrt ..plt
-    mov     [rax], rdx
+    mov     [rax], rcx
     mov     rax, -1
     ret

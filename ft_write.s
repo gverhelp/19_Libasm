@@ -16,10 +16,10 @@ ft_write:
     ret
 
 iferror:
-    pop     rbx     ; met rax dans rcx
+    pop     rcx     ; met rax dans rcx
     neg     rax
-    mov     rbx, rax
+    mov     rcx, rax
     call    __errno_location wrt ..plt
-    mov     [rax], rbx
+    mov     [rax], rcx
     mov     rax, -1
     ret
