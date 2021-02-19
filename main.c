@@ -1,99 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gverhelp <gverhelp@student.s19.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/21 12:52:02 by gverhelp          #+#    #+#             */
+/*   Updated: 2020/11/24 11:24:44 by gverhelp         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
-/*
-char *ft_strdup2(const char *s)
+
+int main(void)
 {
-	char *str;
+	int		fd;
+	int		ret;
+	char	*buf = malloc(1024);
+	char	*dest = malloc(sizeof(char) * 10);
 
-	str = NULL;
-	if (!s)
-		return (NULL);
-	if (!(str = malloc((strlen(s) + 1) * sizeof(char *))))
-		return (NULL);
-	while (s[a])
-	{
-		str[a] = s[a];
-		a++;
-	}
-	str[a] = '\0';
-	return (str);
-}
-*/
-/*
-int	ft_strcmp2(char *s1, char *s2)
-{
-	int i;
+	printf("\n---------------------------------------------");
+	printf("\n                 FT_STRLEN               \n");
+	printf("---------------------------------------------");
 
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-*/
-/*
-char    *ft_strcpy2(char *dest, char const *src)
-{
-    int a;
+	printf("\n[a]    REAL : (%zu)    MINE : (%zu)\n", strlen("a"), ft_strlen("a"));
+	printf("[abcdefgh]    REAL : (%zu)    MINE : (%zu)\n", strlen("abcdefgh"), ft_strlen("abcdefgh"));
+	printf("[abcdefghijklmnopqrstuvwxyz]    REAL : (%zu)    MINE : (%zu)\n", strlen("abcdefghijklmnopqrstuvwxyz"), ft_strlen("abcdefghijklmnopqrstuvwxyz"));
+	printf("[]    REAL : (%zu)    MINE : (%zu)\n", strlen(""), ft_strlen(""));
+	printf("[abc\\0def]    REAL : (%zu)    MINE : (%zu)\n", strlen("abc\0def"), ft_strlen("abc\0def"));
 
-    a = 0;
-    while (src[a])
-    {
-        dest[a] = src[a];
-        a++;
-    }
-    dest[a] = '\0';
-    return (dest);
-}
-*/
-/*
-size_t ft_strlen2(char *str)
-{
-    int a;
+	printf("\n---------------------------------------------");
+	printf("\n                 FT_STRCMP               \n");
+	printf("---------------------------------------------");
 
-    a = 0;
-    while (str[a])
-        a++;
-    return (a);
-}
-*/
+	printf("\n[abc] [abcdef]    REAL : (%d)    MINE : (%d)\n", strcmp("abc", "abcdef"), ft_strcmp("abc", "abcdef"));
+	printf("[abc] [abc]    REAL : (%d)    MINE : (%d)\n", strcmp("abc", "abc"), ft_strcmp("abc", "abc"));
+	printf("[abcdef] [abc]    REAL : (%d)    MINE : (%d)\n", strcmp("abcdef", "abc"), ft_strcmp("abcdef", "abc"));
+	printf("[] []    REAL : (%d)    MINE : (%d)\n", strcmp("", ""), ft_strcmp("", ""));
+	printf("[] [abc]    REAL : (%d)    MINE : (%d)\n", strcmp("", "abc"), ft_strcmp("", "abc"));
+	printf("[abc] []    REAL : (%d)    MINE : (%d)\n", strcmp("abc", ""), ft_strcmp("abc", ""));
 
-int main()
-{
-	char s1[50] = "coucou";
-	char s2[50] = "salut";
-	char *str;
-	int a = 0;
+	printf("\n---------------------------------------------");
+	printf("\n                 FT_STRCPY               \n");
+	printf("---------------------------------------------");
 
-//  printf("ft_strlen() : |%zu|\n", ft_strlen(s1));
-//	printf("strlen() : |%zu|\n", strlen(s1));
-//	printf("ft_strcpy() : |%s|\n", ft_strcpy(s1, s2));
-//	printf("strcpy() : |%s|\n", strcpy(s1, s2));
-//	printf("ft_strcmp() : |%d|\n", ft_strcmp(s1, s2));
-//  printf("strcmp() : |%d|\n", strcmp(s1, s2));
-//	printf("ft_strdup() : |%s|\n", str = ft_strdup("slt cv ?"));
-//	printf("strdup() : |%s|\n", strdup(""));
-	printf("ft_write() : |%zd|\n", ft_write(1, "coucou\n", 7));
-	printf("write() : |%zd|\n", write(2, "coucou\n", 7));
+	printf("\n[abcdef]    REAL : (%s)    MINE : (%s)\n", strcpy(dest, "abcdef"), ft_strcpy(dest, "abcdef"));
+	printf("[]    REAL : (%s)    MINE : (%s)\n", strcpy(dest, ""), ft_strcpy(dest, ""));
+	printf("[abc\\0def]    REAL : (%s)    MINE : (%s)\n", strcpy(dest, "abc\0def"), ft_strcpy(dest, "abc\0def"));
 
-///////////////////////////////////////////////////////////////
-/*	int	fd;
-	char	buffer[40];
-	int	i = 0;
-	while(i < 40)
-	{
-		buffer[i] = 0;
-		i++;
-	}
-	fd = open("./test.txt",	O_RDWR);
-	printf("%zd\n",ft_read(fd, buffer, 39));
-	printf("buffer||%s\n", buffer);
-*/
-/*
-	while (str[a])
-	{
-		printf("|%c|\n", str[a]);
-		a++;
-	}
-	printf("|%c|\n", str[a]);
-*/
+	printf("\n---------------------------------------------");
+	printf("\n                 FT_STRDUP               \n");
+	printf("---------------------------------------------");
+
+	printf("\n[abcdef]    REAL : (%s)    MINE : (%s)\n", strdup("abcdef"), ft_strdup("abcdef"));
+	printf("[]    REAL : (%s)    MINE : (%s)\n", strdup(""), ft_strdup(""));
+	printf("[abc\\0def]    REAL : (%s)     MINE : (%s)\n", strdup("abc\0def"), ft_strdup("abc\0def"));
+
+	printf("\n---------------------------------------------");
+	printf("\n                  FT_WRITE               \n");
+	printf("---------------------------------------------\n");
+
+	printf("\n[abcdef]    REAL : (%zd)    MINE : (%zd)\n", write(1, "abcdef\n", 7), ft_write(1, "abcdef\n", 7));
+	printf("[abc def]    REAL : (%zd)     MINE : (%zd)\n", write(1, "abc def\n", 3), ft_write(1, "abc def\n", 3));
+	printf("[]    REAL : (%zd)     MINE : (%zd)\n", write(1, "", 0), ft_write(1, "", 0));
+
+	printf("\n---------------------------------------------");
+	printf("\n                  FT_READ                \n");
+	printf("---------------------------------------------\n");
+
+	fd = open("./ft_strcpy.s", O_RDONLY);
+	errno = 0;
+	printf("REAL\n\nret : |%zd|\nbuf : |%s|\n", read(fd, buf, 20), buf);
+	printf("errno : |%d|\n", errno);
+	close(fd);
+	fd = open("./ft_strcpy.s", O_RDONLY);
+	errno = 0;
+	printf("MINE\n\nret : |%zd|\nbuf : |%s|\n", ft_read(fd, buf, 20), buf);
+	printf("errno : |%d|\n", errno);
+	close(fd);
+
+	fd = -1;
+	errno = 0;
+	printf("REAL\n\nret : |%zd|\nbuf : |%s|\n", read(fd, buf, 20), buf);
+	printf("errno : |%d|\n", errno);
+	errno = 0;
+	printf("MINE\n\nret : |%zd|\nbuf : |%s|\n", ft_read(fd, buf, 30), buf);
+	printf("errno : |%d|\n", errno);
+	close(fd);
 	return (0);
 }

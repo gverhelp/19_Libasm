@@ -10,14 +10,25 @@ loop:
     mov bl, byte [rdi + rax]
     mov cl, byte [rsi + rax]
     cmp bl, 0
-    je  return
+    je  compare
     cmp cl, 0
-    je  return
+    je  compare
     cmp bl, cl
-    jne return
+    jne compare
     jmp loop
 
-return:
+compare:
     mov rax, rbx
     sub rax, rcx
+    cmp rax, 0
+    jg  supp
+    jl  inf
+    ret
+
+supp:
+    mov rax, 1
+    ret
+
+inf:
+    mov rax, -1
     ret
